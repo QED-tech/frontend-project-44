@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "simple-git-hooks": {
+    "pre-commit": "make lint-fix"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/QED-tech/frontend-project-44.git"
@@ -18,7 +21,8 @@
   "homepage": "https://github.com/QED-tech/frontend-project-44#readme",
   "type": "module",
   "bin": {
-    "brain-games": "bin/brain-games.js"
+    "brain-games": "bin/brain-games.js",
+    "brain-even": "bin/brain-even.js"
   },
   "dependencies": {
     "eslint": "^8.31.0",
