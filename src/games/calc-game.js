@@ -1,7 +1,7 @@
 import readlineSync from 'readline-sync';
 
 export default (name) => {
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
+  console.log('What is the result of the expression?');
 
   const GAME_ROUNDS = 3;
 
