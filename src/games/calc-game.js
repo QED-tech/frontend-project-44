@@ -9,7 +9,7 @@ export default (name) => {
 
   const getRandomOperation = () => {
     const operations = ['+', '-', '*'];
-    return operations[Math.round(Math.random() * operations.length)];
+    return operations[Math.floor(Math.random() * operations.length)];
   };
 
   const getCorrectAnswer = (leftOperand, rightOperand, operation) => {
