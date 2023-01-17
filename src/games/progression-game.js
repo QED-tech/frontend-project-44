@@ -6,7 +6,7 @@ const isCorrectAnswer = (correctAnswer, userAnswer) => correctAnswer === +userAn
 
 const generateProgression = () => {
   const progressionLenght = getRandomNumber(10, 5);
-  const emptyIndexInProgression = getRandomNumber(progressionLenght, 0);
+  const hiddenProgressionIndex = getRandomNumber(progressionLenght, 0);
   const progressionIncreaseFactor = getRandomNumber(15, 1);
   let initialNumProgression = getRandomNumber(100, 0);
 
@@ -18,7 +18,7 @@ const generateProgression = () => {
     initialNumProgression = nextNum;
   }
 
-  progression[emptyIndexInProgression] = '..';
+  progression[hiddenProgressionIndex] = '..';
 
   return [progression, progressionIncreaseFactor];
 };
