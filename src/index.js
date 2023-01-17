@@ -4,12 +4,25 @@ import gcdGame from './games/gcd-game.js';
 import progressionGame from './games/progression-game.js';
 
 const gameSelector = {
-  even: (userName) => evenGame(userName),
-  calc: (userName) => calcGame(userName),
-  gcd: (userName) => gcdGame(userName),
-  progression: (userName) => progressionGame(userName),
+  even: () => evenGame(),
+  calc: () => calcGame(),
+  gcd: () => gcdGame(),
+  progression: () => progressionGame(),
 };
 
+const GAME_ROUNDS = 3;
+
 export default (userName, gameID) => {
-  gameSelector[gameID](userName);
+  const game = gameSelector[gameID]();
+
+  for (let i = 0; i < GAME_ROUNDS; i += 1) {
+    const gameResult = game();
+
+    if (gameResult === false) {
+      console.log(`Let's try again, ${userName}!`);
+      return;
+    }
+  }
+
+  console.log(`Congratulations, ${userName}!`);
 };

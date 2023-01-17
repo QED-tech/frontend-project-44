@@ -1,72 +1,55 @@
 import readlineSync from 'readline-sync';
 
-export default (name) => {
+const calc = (leftOperand, rightOperand, operation) => {
+  switch (operation) {
+    case '+': {
+      return leftOperand + rightOperand;
+    }
+
+    case '-': {
+      return leftOperand - rightOperand;
+    }
+
+    case '*': {
+      return leftOperand * rightOperand;
+    }
+
+    default: {
+      return null;
+    }
+  }
+};
+
+export default () => {
   console.log('What is the result of the expression?');
 
-  const GAME_ROUNDS = 3;
+  return () => {
+    const getRandomNumber = () => Math.round(Math.random() * 10);
 
-  const getRandomNumber = () => Math.round(Math.random() * 10);
+    const getRandomOperation = () => {
+      const operations = ['+', '-', '*'];
+      return operations[Math.floor(Math.random() * operations.length)];
+    };
 
-  const getRandomOperation = () => {
-    const operations = ['+', '-', '*'];
-    return operations[Math.floor(Math.random() * operations.length)];
+    const isCorrectAnswer = (correctAnswer, userAnswer) => correctAnswer === +userAnswer;
+
+    const leftOperand = getRandomNumber();
+    const rightOperand = getRandomNumber();
+
+    const operation = getRandomOperation();
+
+    console.log(`Question: ${leftOperand} ${operation} ${rightOperand}`);
+    const userAnswer = readlineSync.question('Your answer: ');
+
+    const correctAnswer = calc(leftOperand, rightOperand, operation);
+    const isCorrect = isCorrectAnswer(correctAnswer, userAnswer);
+
+    const roundMessage = isCorrect
+      ? 'Correct!'
+      : `'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`;
+
+    console.log(roundMessage);
+
+    return isCorrect;
   };
-
-  const getCorrectAnswer = (leftOperand, rightOperand, operation) => {
-    switch (operation) {
-      case '+': {
-        return leftOperand + rightOperand;
-      }
-
-      case '-': {
-        return leftOperand - rightOperand;
-      }
-
-      case '*': {
-        return leftOperand * rightOperand;
-      }
-
-      default: {
-        return null;
-      }
-    }
-  };
-
-  const isCorrectAnswer = (correctAnswer, userAnswer) => correctAnswer === +userAnswer;
-
-  const calcGame = () => {
-    for (let i = 0; i < GAME_ROUNDS; i += 1) {
-      const leftOperand = getRandomNumber();
-      const rightOperand = getRandomNumber();
-
-      const operation = getRandomOperation();
-
-      console.log(`Question: ${leftOperand} ${operation} ${rightOperand}`);
-      const userAnswer = readlineSync.question('Your answer: ');
-
-      const correctAnswer = getCorrectAnswer(
-        leftOperand,
-        rightOperand,
-        operation,
-      );
-      const isCorrect = isCorrectAnswer(correctAnswer, userAnswer);
-
-      const roundMessage = isCorrect
-        ? 'Correct!'
-        : `'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`;
-
-      if (!isCorrect) {
-        console.log(roundMessage);
-        console.log(`Let's try again, ${name}!`);
-
-        return;
-      }
-
-      console.log(roundMessage);
-    }
-
-    console.log(`Congratulations, ${name}!`);
-  };
-
-  calcGame();
 };
