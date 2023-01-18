@@ -18,9 +18,10 @@ const generateProgression = () => {
     initialNumProgression = nextNum;
   }
 
+  const correctAnswer = progression[hiddenProgressionIndex]
   progression[hiddenProgressionIndex] = '..';
 
-  return [progression, progressionIncreaseFactor];
+  return [progression, correctAnswer];
 };
 
 export default () => {
