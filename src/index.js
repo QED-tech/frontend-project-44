@@ -2,12 +2,14 @@ import evenGame from './games/even-game.js';
 import calcGame from './games/calc-game.js';
 import gcdGame from './games/gcd-game.js';
 import progressionGame from './games/progression-game.js';
+import primeGame from './games/prime-game.js';
 
 const gameSelector = {
   even: () => evenGame(),
   calc: () => calcGame(),
   gcd: () => gcdGame(),
   progression: () => progressionGame(),
+  prime: () => primeGame(),
 };
 
 const GAME_ROUNDS = 3;
