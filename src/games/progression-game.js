@@ -18,7 +18,7 @@ const generateProgression = () => {
     initialNumProgression = nextNum;
   }
 
-  const correctAnswer = progression[hiddenProgressionIndex]
+  const correctAnswer = progression[hiddenProgressionIndex];
   progression[hiddenProgressionIndex] = '..';
 
   return [progression, correctAnswer];
