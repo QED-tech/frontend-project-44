@@ -3,6 +3,17 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/e8daee369333f71fe4cf/maintainability)](https://codeclimate.com/github/QED-tech/frontend-project-44/maintainability)
 
+## **Sistem requirements:**
+  ***Node.js v19.0.0***
+
+## **Installation:**
+1. Clone the project
+2. Install dependencies
+
+ ```bash
+ make install
+ ```
+
 ## Brain Games
 This console-based game included simple logic and arithmetic mini-games 
 
