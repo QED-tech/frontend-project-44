@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 
-import greetingUser from '../src/cli.js';
-import gameRunner from '../src/index.js';
+import evenGame from '../src/games/even-game.js';
 
-const name = greetingUser();
-
-gameRunner(name, 'even');
+evenGame();

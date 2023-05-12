@@ -1,4 +1,5 @@
-import readlineSync from 'readline-sync';
+import gameEngine from '../index.js';
+import getRandomNumber from '../utils.js';
 
 const calc = (leftOperand, rightOperand, operation) => {
   switch (operation) {
@@ -20,36 +21,25 @@ const calc = (leftOperand, rightOperand, operation) => {
   }
 };
 
-export default () => {
-  console.log('What is the result of the expression?');
-
-  return () => {
-    const getRandomNumber = () => Math.round(Math.random() * 10);
-
-    const getRandomOperation = () => {
-      const operations = ['+', '-', '*'];
-      return operations[Math.floor(Math.random() * operations.length)];
-    };
-
-    const isCorrectAnswer = (correctAnswer, userAnswer) => correctAnswer === +userAnswer;
-
-    const leftOperand = getRandomNumber();
-    const rightOperand = getRandomNumber();
-
-    const operation = getRandomOperation();
-
-    console.log(`Question: ${leftOperand} ${operation} ${rightOperand}`);
-    const userAnswer = readlineSync.question('Your answer: ');
-
-    const correctAnswer = calc(leftOperand, rightOperand, operation);
-    const isCorrect = isCorrectAnswer(correctAnswer, userAnswer);
-
-    const roundMessage = isCorrect
-      ? 'Correct!'
-      : `'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`;
-
-    console.log(roundMessage);
-
-    return isCorrect;
+const calcGame = () => {
+  const getRandomOperation = () => {
+    const operations = ['+', '-', '*'];
+    return operations[Math.floor(Math.random() * operations.length)];
   };
+
+  const leftOperand = getRandomNumber();
+  const rightOperand = getRandomNumber();
+
+  const operation = getRandomOperation();
+
+  const correctAnswer = calc(leftOperand, rightOperand, operation);
+  const question = `${leftOperand} ${operation} ${rightOperand}`;
+
+  return [question, String(correctAnswer)];
+};
+
+const rule = 'What is the result of the expression?';
+
+export default () => {
+  gameEngine(calcGame, rule);
 };

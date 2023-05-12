@@ -1,10 +1,7 @@
-import readlineSync from 'readline-sync';
+import gameEngine from '../index.js';
+import getRandomNumber from '../utils.js';
 
-const getRandomNumber = (max, min) => Math.round(Math.random() * (max - min) + min);
-
-const isCorrectAnswer = (correctAnswer, userAnswer) => correctAnswer === +userAnswer;
-
-const generateProgression = () => {
+const progressionGame = () => {
   const progressionLenght = getRandomNumber(10, 5);
   const hiddenProgressionIndex = getRandomNumber(progressionLenght - 1, 0);
   const progressionIncreaseFactor = getRandomNumber(15, 1);
@@ -21,26 +18,11 @@ const generateProgression = () => {
   const correctAnswer = progression[hiddenProgressionIndex];
   progression[hiddenProgressionIndex] = '..';
 
-  return [progression, correctAnswer];
+  return [progression.join(' '), String(correctAnswer)];
 };
 
+const rule = 'What number is missing in the progression?';
+
 export default () => {
-  console.log('What number is missing in the progression?');
-
-  return () => {
-    const [progression, correctAnswer] = generateProgression();
-
-    console.log(`Question: ${progression.join(' ')}`);
-    const userAnswer = readlineSync.question('Your answer: ');
-
-    const isCorrect = isCorrectAnswer(correctAnswer, userAnswer);
-
-    const roundMessage = isCorrect
-      ? 'Correct!'
-      : `'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`;
-
-    console.log(roundMessage);
-
-    return isCorrect;
-  };
+  gameEngine(progressionGame, rule);
 };

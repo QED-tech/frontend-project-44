@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 
-import greetingUser from '../src/cli.js';
-import gameRunner from '../src/index.js';
+import primeGame from '../src/games/prime-game.js';
 
-const name = greetingUser();
-
-gameRunner(name, 'prime');
+primeGame();

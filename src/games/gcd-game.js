@@ -1,4 +1,5 @@
-import readlineSync from 'readline-sync';
+import gameEngine from '../index.js';
+import getRandomNumber from '../utils.js';
 
 const gcd = (j, z) => {
   let a = j;
@@ -15,34 +16,21 @@ const gcd = (j, z) => {
   return a + b;
 };
 
+const gcdGame = () => {
+  const getCorrectAnswer = (a, b) => gcd(a, b);
+
+  const randomNumberA = getRandomNumber();
+  const randomNumberB = getRandomNumber();
+
+  const question = `${randomNumberA} ${randomNumberB}`;
+
+  const correctAnswer = getCorrectAnswer(randomNumberA, randomNumberB);
+
+  return [question, String(correctAnswer)];
+};
+
+const rule = 'Find the greatest common divisor of given numbers.';
+
 export default () => {
-  console.log('Find the greatest common divisor of given numbers.');
-
-  return () => {
-    const getRandomNumber = () => Math.round(Math.random() * 20);
-
-    const getCorrectAnswer = (a, b) => gcd(a, b);
-
-    const isCorrectAnswer = (correctAnswer, userAnswer) => correctAnswer === +userAnswer;
-
-    const getWrongAnswerMsg = (correctAnswer, userAnswer) => `'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`;
-
-    const randomNumberA = getRandomNumber();
-    const randomNumberB = getRandomNumber();
-
-    console.log(`Question: ${randomNumberA} ${randomNumberB}`);
-
-    const userAnswer = readlineSync.question('Your answer: ');
-    const correctAnswer = getCorrectAnswer(randomNumberA, randomNumberB);
-
-    const isCorrect = isCorrectAnswer(correctAnswer, userAnswer);
-
-    const roundMessage = isCorrect
-      ? 'Correct!'
-      : getWrongAnswerMsg(correctAnswer, userAnswer);
-
-    console.log(roundMessage);
-
-    return isCorrect;
-  };
+  gameEngine(gcdGame, rule);
 };
